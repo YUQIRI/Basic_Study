@@ -1,0 +1,9 @@
+E:\ST\STM32CubeCLT_1.19.0\CMake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug --preset Debug -S E:\YUQIRI\Basic-Study\Circle_Buffer -B E:\YUQIRI\Basic-Study\Circle_Buffer\build\Debug
+Preset CMake variables:
+
+  CMAKE_TOOLCHAIN_FILE:FILEPATH="E:/YUQIRI/Basic-Study/Circle_Buffer/cmake/gcc-arm-none-eabi.cmake"
+
+Build type: Debug
+-- Configuring done (0.1s)
+-- Generating done (0.0s)
+-- Build files have been written to: E:/YUQIRI/Basic-Study/Circle_Buffer/build/Debug
