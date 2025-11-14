@@ -1,0 +1,13 @@
+# 忽略编译生成的 .o 和 .elf 文件
+*.o
+*.elf
+
+# 忽略 IDE 配置文件（以 CLion 为例）
+.idea/
+cmake-build-debug/
+
+# 忽略日志文件
+*.log
+
+# 忽略临时文件
+*.tmp

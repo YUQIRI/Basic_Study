@@ -22,13 +22,9 @@
 
 /* USER CODE BEGIN 0 */
 #include <string.h>
-#include "Circle_Buffer.h"
+#include "../../Lib/Circle_Buffer/Inc/Circle_Buffer.h"
 
-static volatile char g_RecvFlag = 0;
-static volatile char g_TransFlag = 0;
-static uint8_t g_rxchar;
-static uint8_t g_rxBuf[100];
-static CircleBuf g_uart1_rx;
+
 /* USER CODE END 0 */
 
 UART_HandleTypeDef huart1;
@@ -126,7 +122,11 @@ void HAL_UART_MspDeInit(UART_HandleTypeDef* uartHandle)
 
 /* USER CODE BEGIN 1 */
 
-
+static volatile int g_RecvFlag = 0;
+static volatile int g_TransFlag = 0;
+static uint8_t g_rxchar;
+static uint8_t g_rxBuf[100];
+static CircleBuf g_uart1_rx;
 
 void UART1Start()
 {
@@ -142,19 +142,23 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
   if (huart == &huart1)
   {
     g_RecvFlag = 1;
+
     Circle_Buf_Write(&g_uart1_rx,g_rxchar);
-    HAL_UART_Receive_IT(&huart1,g_rxBuf,1);
+    HAL_GPIO_TogglePin(GPIOA,GPIO_PIN_15);
+
+    HAL_UART_Receive_IT(&huart1,&g_rxchar,1);
   }
 }
 
 void UARTWaitRxComplete(void)
 {
-  while (g_RecvFlag == 0);
+  while (g_RecvFlag != 1);
   g_RecvFlag = 0;
 }
 
 int UARTRead(uint8_t * pVal)
 {
+
   return Circle_Buf_Read(&g_uart1_rx,pVal);
 }
 
@@ -168,7 +172,7 @@ void HAL_UART_TxCpltCallback(UART_HandleTypeDef *huart)
 
 void UARTWaitTxComplete(void)
 {
-  while (g_TransFlag == 0);
+  while (g_TransFlag != 1);
   g_TransFlag = 0;
 }
 

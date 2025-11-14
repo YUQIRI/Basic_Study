@@ -93,7 +93,7 @@ int main(void)
 
   char *Test = "Plz Enter a Char: \r\n";
   // unsigned char *ReceiveData = "";
-  uint8_t RecvChar;
+  char RecvChar;
 
   /* Enable RXNE interrupt */
   UART1Start();
@@ -103,19 +103,16 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_SET);
-    HAL_Delay(500);
-    HAL_GPIO_WritePin(GPIOA, GPIO_PIN_2, GPIO_PIN_RESET);
 
     /* Enable txe interrupt */
     HAL_UART_Transmit_IT(&huart1,(const uint8_t *)Test,strlen(Test));
     UARTWaitTxComplete();
 
-    while (0 == UARTRead(&RecvChar));
+    while (0 != UARTRead((uint8_t * )&RecvChar));
 
     RecvChar += 1;
 
-    HAL_UART_Transmit(&huart1,&RecvChar,1,1000);
+    HAL_UART_Transmit(&huart1,(const uint8_t *)&RecvChar,1,1000);
     HAL_UART_Transmit(&huart1,(const uint8_t *)"\r\n",2,1000);
     /* USER CODE END WHILE */
 

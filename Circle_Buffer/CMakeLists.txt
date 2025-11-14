@@ -34,8 +34,9 @@ enable_language(C ASM)
 # Create an executable object type
 add_executable(${PROJECT_NAME}
         # ... 其他已有文件 ...
-        Core/Src/circle_buffer.c  # 添加你的环形缓冲区实现文件
+        Lib/Circle_Buffer/Src/Circle_Buffer.c  # 添加你的环形缓冲区实现文件
 )
+
 # Add STM32CubeMX generated sources
 add_subdirectory(cmake/stm32cubemx)
 
@@ -52,6 +53,7 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
 # Add include paths
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     # Add user defined include paths
+    Circle_Buffer/Lib/Circle_Buffer/Inc
 )
 
 # Add project symbols (macros)

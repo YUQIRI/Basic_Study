@@ -29,7 +29,7 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-#include "Circle_Buffer.h"
+#include "../../Lib/Circle_Buffer/Inc/Circle_Buffer.h"
 /* USER CODE END Includes */
 
 extern UART_HandleTypeDef huart1;
